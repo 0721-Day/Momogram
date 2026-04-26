@@ -32205,7 +32205,7 @@ public class ChatActivity extends BaseFragment implements
                     }
                 }
                 scrimPopupWindowItems = new ActionBarMenuSubItem[items.size()];
-                if(isPeerNoForwards() || message.messageOwner.noforwards || getDialogId() == UserObject.VERIFY;){
+                if(isPeerNoForwards() || message.messageOwner.noforwards || getDialogId() == UserObject.VERIFY){
                     // 禁止转发中移除部分按钮
                     ArrayList<Integer> needRemoveList = new ArrayList<>();
 
