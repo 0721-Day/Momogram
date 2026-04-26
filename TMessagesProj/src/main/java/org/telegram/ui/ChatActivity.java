@@ -32210,10 +32210,10 @@ public class ChatActivity extends BaseFragment implements
                     ArrayList<Integer> needRemoveList = new ArrayList<>();
 
                     needRemoveList.add(OPTION_FORWARD);
-                    needRemoveList.add(OPTION_FORWARD_NOCAPTION);
-                    needRemoveList.add(OPTION_FORWARD_NOQUOTE);
-                    needRemoveList.add(OPTION_SAVE_MESSAGE); // 保存到收藏夹
-                    needRemoveList.add(OPTION_REPEAT); // +1
+                    // needRemoveList.add(OPTION_FORWARD_NOCAPTION);
+                    // needRemoveList.add(OPTION_FORWARD_NOQUOTE);
+                    // needRemoveList.add(OPTION_SAVE_MESSAGE); // 保存到收藏夹
+                    // needRemoveList.add(OPTION_REPEAT); // +1
 
 
                     // nekox
