@@ -290,4 +290,4 @@ jobs:
           find artifacts -name "*.apk" -exec cp {} apks \;
           echo $PWD
           ls */*/*
-          ./ghr -delete -prerelease -u dic1911 -r Momogram -c ${{ github.sha }} -t "${{ github.token }}" -n "${{ github.event.inputs.tag }}" "${{ github.event.inputs.tag }}" apks
+          ./ghr -delete -prerelease -u 0721-Day -r Momogram -c ${{ github.sha }} -t "${{ github.token }}" -n "${{ github.event.inputs.tag }}" "${{ github.event.inputs.tag }}" apks
