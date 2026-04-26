@@ -15329,10 +15329,14 @@ public class PhotoViewer implements NotificationCenter.NotificationCenterDelegat
             if (noforwards) {
                 galleryButton.setVisibility(View.GONE);
                 galleryGap.setVisibility(View.GONE);
+				menuItem.hideSubItem(gallery_menu_send_noquote); // fix BUG
             } else {
                 galleryButton.setVisibility(View.VISIBLE);
                 galleryGap.setVisibility(View.VISIBLE);
             }
+
+			galleryButton.setVisibility(View.VISIBLE);
+			
             allowShare = !noforwards;
             menuItem.showSubItem(gallery_menu_share);
             menuItem.checkHideMenuItem();
