@@ -31320,6 +31320,9 @@ public class ChatActivity extends BaseFragment implements
         }
         allowPin = allowPin && message.getId() > 0 && (message.messageOwner.action == null || message.messageOwner.action instanceof TLRPC.TL_messageActionEmpty) && !message.isExpiredStory() && message.type != MessageObject.TYPE_STORY_MENTION;
         boolean noforwards = isPeerNoForwards() || message.messageOwner.noforwards || getDialogId() == UserObject.VERIFY;
+
+        boolean noforward = false;
+
         boolean noforwardsOrPaidMedia = (noforwards && !NekoXConfig.disableFlagSecure) || message.type == MessageObject.TYPE_PAID_MEDIA;
         boolean allowUnpin = message.getDialogId() != mergeDialogId && allowPin && (pinnedMessageObjects.containsKey(message.getId()) || groupedMessages != null && !groupedMessages.messages.isEmpty() && pinnedMessageObjects.containsKey(groupedMessages.messages.get(0).getId())) && !message.isExpiredStory();
         boolean allowEdit = message.canEditMessage(currentChat) && !chatActivityEnterView.hasAudioToSend() && message.getDialogId() != mergeDialogId && message.type != MessageObject.TYPE_STORY && message.type != MessageObject.TYPE_POLL;
@@ -32202,6 +32205,37 @@ public class ChatActivity extends BaseFragment implements
                     }
                 }
                 scrimPopupWindowItems = new ActionBarMenuSubItem[items.size()];
+                getMessagesController().isChatNoForwards(currentChat) || message.messageOwner.noforwards || getDialogId() == UserObject.VERIFY;
+                if(getMessagesController().isChatNoForwards(currentChat) || message.messageOwner.noforwards){
+                    // 禁止转发中移除部分按钮
+                    ArrayList<Integer> needRemoveList = new ArrayList<>();
+
+                    needRemoveList.add(OPTION_FORWARD);
+                    needRemoveList.add(OPTION_FORWARD_NOCAPTION);
+                    needRemoveList.add(OPTION_FORWARD_NOQUOTE);
+                    needRemoveList.add(OPTION_SAVE_MESSAGE); // 保存到收藏夹
+                    needRemoveList.add(OPTION_REPEAT); // +1
+
+
+                    // nekox
+                    needRemoveList.add(OPTION_FORWARD);
+                    needRemoveList.add(nkbtn_forward_noquote);
+                    needRemoveList.add(nkbtn_savemessage); // 保存到收藏夹
+                    needRemoveList.add(nkbtn_repeat);
+                    
+                    for (Integer currentElement : needRemoveList) {
+                        int indexToRemove = options.indexOf(currentElement);
+                        if (indexToRemove != -1) {
+                            items.remove(indexToRemove);
+                            options.remove(indexToRemove);
+                            icons.remove(indexToRemove);
+                        }
+                    }
+
+                    // 恢复禁止转发标签
+                    noforwards = false;
+                }
+
                 for (int a = 0, N = items.size(); a < N; a++) {
                     ActionBarMenuSubItem cell = new ActionBarMenuSubItem(getParentActivity(), a == 0, a == N - 1, themeDelegate);
                     cell.setMinimumWidth(AndroidUtilities.dp(200));
