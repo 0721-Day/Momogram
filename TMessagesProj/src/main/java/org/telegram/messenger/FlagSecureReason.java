@@ -64,6 +64,8 @@ public class FlagSecureReason {
             return;
         }
 
+        return;
+
         if (isSecuredNow(window)) {
             window.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
             AndroidUtilities.logFlagSecure();
